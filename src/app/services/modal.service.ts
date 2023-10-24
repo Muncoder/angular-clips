@@ -10,25 +10,31 @@ interface IModal {
 })
 export class ModalService {
   private modals: IModal[] = []
-  
   constructor() { }
 
-  register(id: string) {
+  register(id: string){
     this.modals.push({
       id,
-      visible: false        
+      visible: false
     })
-    console.log(this.modals)
+  }
+
+  unregister(id: string){
+    this.modals = this.modals.filter(
+      element => element.id !== id
+    )
   }
 
   isModalOpen(id: string) : boolean {
-    return !!this.modals.find(element => element.id === id)?.visible
+    return Boolean(this.modals.find(element => element.id === id)?.visible)
   }
 
-  toggleModal(id: string) {
+  toggleModal(id: string){
     const modal = this.modals.find(element => element.id === id)
+    
+    console.log(this.modals)
 
-    if(modal) {
+    if(modal){
       modal.visible = !modal.visible
     }
   }
