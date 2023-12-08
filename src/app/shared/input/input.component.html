@@ -1,7 +1,9 @@
 <input [formControl]="control" [type]="type"
        class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
               duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
-       [placeholder]="placeHolder" minlength="3" />
+       [placeholder]="placeHolder" [mask]="format"
+        [dropSpecialCharacters]="false"
+/>
 <ng-container *ngIf="control.touched && control.dirty">
   <p class="text-red-400" *ngIf="control.errors?.['pattern']">
     - at least 8 characters
@@ -29,4 +31,8 @@
   <p *ngIf="control.errors?.['max']" class="text-red-400">
     Valid age minimum 18 and maximum 120.
   </p>
+  <p *ngIf="control.errors?.['phoneNumber']" class="text-red-400">
+    Phone number required
+  </p>
+
 </ng-container>
